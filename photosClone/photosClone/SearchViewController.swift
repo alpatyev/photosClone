@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  SearchViewController.swift
 //  photosClone
 //
 //  Created by Nikita Alpatiev on 1/12/23.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+
         // Do any additional setup after loading the view.
     }
     
