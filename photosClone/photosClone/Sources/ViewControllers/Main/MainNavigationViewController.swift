@@ -2,15 +2,23 @@
 //  MainNavigationViewController.swift
 //  photosClone
 //
-//  Created by Nikita Alpatiev on 1/12/23.
+//  Created by Nikita Alpatiev on 1/15/23.
 //
 
-import SnapKit
 import UIKit
 
 class MainNavigationViewController: UINavigationController {
+    
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupControllers()
+    }
+    
+    // MARK: - Setups
+    
+    private func setupControllers() {
+        
     }
 }

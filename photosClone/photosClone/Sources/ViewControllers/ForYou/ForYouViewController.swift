@@ -10,7 +10,30 @@ import UIKit
 
 class ForYouViewController: UIViewController {
 
+    // MARK: - UI
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        setupHierarchy()
+        setupLayout()
     }
+    
+    // MARK: - Setups
+    
+    private func setupView() {
+        title = "For You"
+    }
+    
+    private func setupHierarchy() {
+        
+    }
+    
+    private func setupLayout() {
+        
+    }
+    
+    // MARK: - Actions
 }

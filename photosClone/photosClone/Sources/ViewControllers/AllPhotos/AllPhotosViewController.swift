@@ -9,8 +9,32 @@ import SnapKit
 import UIKit
 
 class AllPhotosViewController: UIViewController {
-
+    
+    // MARK: - UI
+    
+ 
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        setupHierarchy()
+        setupLayout()
     }
+        
+    // MARK: - Setups
+    
+    private func setupView() {
+        title = "All Photos"
+    }
+    
+    private func setupHierarchy() {
+    }
+    
+    private func setupLayout() {
+        
+    }
+    
+    // MARK: - Actions
 }
