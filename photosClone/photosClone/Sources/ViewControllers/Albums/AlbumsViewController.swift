@@ -92,7 +92,7 @@ class AlbumsViewController: UIViewController {
                 layoutSection.contentInsets.bottom = defaultPaging / 2
                 
                 let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .estimated(defaultPaging * 2.1))
+                                                              heightDimension: .absolute(defaultPaging * 2))
                 let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
@@ -119,7 +119,7 @@ class AlbumsViewController: UIViewController {
                 layoutSection.contentInsets.bottom = defaultPaging / 2
                 
                 let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .estimated(defaultPaging))
+                                                              heightDimension: .absolute(defaultPaging))
                 let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
@@ -156,7 +156,7 @@ class AlbumsViewController: UIViewController {
                 
                 if section == 2 {
                     let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                  heightDimension: .estimated(defaultPaging))
+                                                                  heightDimension: .absolute(defaultPaging))
                     let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
                         layoutSize: layoutHeaderSize,
                         elementKind: UICollectionView.elementKindSectionHeader,
@@ -213,11 +213,19 @@ extension AlbumsViewController: UICollectionViewDataSource {
                 let cell = collection.dequeueReusableCell(withReuseIdentifier: AlbumCell.cellID, for: indexPath)
                 return cell
             case 1:
-                let cell = collection.dequeueReusableCell(withReuseIdentifier: OverviewCell.cellID, for: indexPath)
-                return cell
+                if let cell = collection.dequeueReusableCell(withReuseIdentifier: OverviewCell.cellID, for: indexPath) as? OverviewCell {
+                    cell.configure(as: "People")
+                    return cell
+                } else {
+                    fallthrough
+                }
             default:
-                let cell = collection.dequeueReusableCell(withReuseIdentifier: UtilitiesCell.cellID, for: indexPath)
-                return cell
+                if let cell = collection.dequeueReusableCell(withReuseIdentifier: UtilitiesCell.cellID, for: indexPath) as? UtilitiesCell {
+                    cell.configure()
+                    return cell
+                } else {
+                    return UICollectionViewCell()
+                }
         }
     }
 }

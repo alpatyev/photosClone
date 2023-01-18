@@ -10,7 +10,7 @@
 		644A02BE29781CF5000EC06F /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A02BD29781CF5000EC06F /* AlbumCell.swift */; };
 		644A02C2297820BE000EC06F /* OverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A02C1297820BE000EC06F /* OverviewCell.swift */; };
 		644A02C4297820D1000EC06F /* UtilitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A02C3297820D1000EC06F /* UtilitiesCell.swift */; };
-		644A02CB29787015000EC06F /* ReusableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A02CA29787015000EC06F /* ReusableHeader.swift */; };
+		644A02CB29787015000EC06F /* MyAlbumsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A02CA29787015000EC06F /* MyAlbumsHeader.swift */; };
 		644A02CD29787450000EC06F /* PeopleAndPlacesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A02CC29787450000EC06F /* PeopleAndPlacesHeader.swift */; };
 		644A02CF297874A0000EC06F /* UtilitiesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644A02CE297874A0000EC06F /* UtilitiesHeader.swift */; };
 		645C37F6296F656700E6E6DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645C37F5296F656700E6E6DF /* AppDelegate.swift */; };
@@ -31,7 +31,7 @@
 		644A02BD29781CF5000EC06F /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		644A02C1297820BE000EC06F /* OverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCell.swift; sourceTree = "<group>"; };
 		644A02C3297820D1000EC06F /* UtilitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesCell.swift; sourceTree = "<group>"; };
-		644A02CA29787015000EC06F /* ReusableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableHeader.swift; sourceTree = "<group>"; };
+		644A02CA29787015000EC06F /* MyAlbumsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAlbumsHeader.swift; sourceTree = "<group>"; };
 		644A02CC29787450000EC06F /* PeopleAndPlacesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAndPlacesHeader.swift; sourceTree = "<group>"; };
 		644A02CE297874A0000EC06F /* UtilitiesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesHeader.swift; sourceTree = "<group>"; };
 		645C37F2296F656700E6E6DF /* photosClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = photosClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +91,7 @@
 		644A02C929787015000EC06F /* AlbumHeaders */ = {
 			isa = PBXGroup;
 			children = (
-				644A02CA29787015000EC06F /* ReusableHeader.swift */,
+				644A02CA29787015000EC06F /* MyAlbumsHeader.swift */,
 				644A02CC29787450000EC06F /* PeopleAndPlacesHeader.swift */,
 				644A02CE297874A0000EC06F /* UtilitiesHeader.swift */,
 			);
@@ -294,7 +294,7 @@
 				645C3818296F6D2B00E6E6DF /* AlbumsViewController.swift in Sources */,
 				645C3812296F6BA900E6E6DF /* PhotosDataModel.swift in Sources */,
 				644A02C4297820D1000EC06F /* UtilitiesCell.swift in Sources */,
-				644A02CB29787015000EC06F /* ReusableHeader.swift in Sources */,
+				644A02CB29787015000EC06F /* MyAlbumsHeader.swift in Sources */,
 				644A02BE29781CF5000EC06F /* AlbumCell.swift in Sources */,
 				644A02CF297874A0000EC06F /* UtilitiesHeader.swift in Sources */,
 				64E5731E2974537D007D307D /* MainTabBarViewController.swift in Sources */,
