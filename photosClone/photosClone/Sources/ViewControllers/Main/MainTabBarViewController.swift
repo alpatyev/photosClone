@@ -38,6 +38,8 @@ final class MainTabBarViewController: UITabBarController {
                            controllerWithTabBarItem(SearchViewController(),
                                                     title: "Search",
                                                     image: "magnifyingglass")]
+        
+        selectedViewController = viewControllers?[2]
     }
     
     private func controllerWithTabBarItem(_ controller: UIViewController, title: String, image: String) -> UINavigationController {

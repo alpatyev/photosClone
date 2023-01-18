@@ -12,8 +12,6 @@ class AllPhotosViewController: UIViewController {
     
     // MARK: - UI
     
- 
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
