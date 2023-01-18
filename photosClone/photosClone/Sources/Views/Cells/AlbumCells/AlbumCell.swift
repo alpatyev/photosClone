@@ -8,15 +8,35 @@
 import UIKit
 
 final class AlbumCell: UICollectionViewCell {
+    
     static var cellID = "album"
+    
+    // MARK: - UI
+    
+    // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .red
-        contentView.addBorders()
+        addBorders()
+        setupHierarchy()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
+    }
+    
+    // MARK: - Setups
+    
+    private func setupHierarchy() {
+        
+    }
+    
+    private func setupLayout() {
+        
+    }
+    
+    public func configure() {
+        
     }
 }

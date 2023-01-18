@@ -38,7 +38,6 @@ class AlbumsViewController: UIViewController {
         return collection
     }()
     
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

@@ -12,13 +12,28 @@ final class MyAlbumsHeader: UICollectionReusableView {
     
     static var headerID = "Albums"
     
+    // MARK: - UI
+    
+    // MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .gray
         addBorders()
+        setupHierarchy()
+        setupLayout()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError()
+    }
+    
+    // MARK: - Setups
+    
+    private func setupHierarchy() {
+        
+    }
+    
+    private func setupLayout() {
+        
     }
 }
