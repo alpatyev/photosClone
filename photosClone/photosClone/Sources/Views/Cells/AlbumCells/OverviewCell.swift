@@ -13,6 +13,8 @@ final class OverviewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .green
+        contentView.addBorders()
+
     }
     
     required init?(coder: NSCoder) {

@@ -1,19 +1,21 @@
 //
-//  UtilitiesCell.swift
+//  MyAlbumsHeader.swift
 //  photosClone
 //
 //  Created by Nikita Alpatiev on 1/18/23.
 //
 
+import SnapKit
 import UIKit
 
-final class UtilitiesCell: UICollectionViewCell {
-    static var cellID = "utilities"
+final class MyAlbumsHeader: UICollectionReusableView {
+    
+    static var headerID = "Albums"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .black
-        contentView.addBorders()
+        backgroundColor = .gray
+        addBorders()
     }
     
     required init?(coder: NSCoder) {

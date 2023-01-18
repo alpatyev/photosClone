@@ -1,5 +1,5 @@
 //
-//  UtilitiesCell.swift
+//  UtilitiesHeader.swift
 //  photosClone
 //
 //  Created by Nikita Alpatiev on 1/18/23.
@@ -7,13 +7,14 @@
 
 import UIKit
 
-final class UtilitiesCell: UICollectionViewCell {
-    static var cellID = "utilities"
+class UtilitiesHeader: UICollectionReusableView {
+    static var headerID = "Utilities"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .black
-        contentView.addBorders()
+        self.backgroundColor = .black
+        addBorders()
+
     }
     
     required init?(coder: NSCoder) {
