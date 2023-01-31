@@ -8,6 +8,13 @@
 import SnapKit
 import UIKit
 
+// MARK: - Protocol that provides highlight ability
+
+protocol Highlightable: AnyObject {
+    func highlight()
+    func unhighlight()
+}
+
 class AlbumsViewController: UIViewController {
     
     // MARK: - UI
@@ -173,17 +180,13 @@ class AlbumsViewController: UIViewController {
     }
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate & UICollectionViewDataSource
 
-extension AlbumsViewController: UICollectionViewDelegate {
+extension AlbumsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         5
     }
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension AlbumsViewController: UICollectionViewDataSource {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if let indexPath = collection.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionView.elementKindSectionHeader).first {
             navigationController?.navigationBar.topItem?.title = indexPath.section > 1 ? "Albums" : ""
@@ -247,6 +250,19 @@ extension AlbumsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collection.deselectItem(at: indexPath, animated: true)
         PhotosDataManager.selectedItem(at: indexPath)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collection.cellForItem(at: indexPath) as? Highlightable {
+            cell.highlight()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collection.cellForItem(at: indexPath) as? Highlightable {
+            cell.unhighlight()
+        }
     }
 }
 

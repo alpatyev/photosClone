@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class UtilitiesCell: UICollectionViewListCell {
+final class UtilitiesCell: UICollectionViewListCell, Highlightable {
     
     static var cellID = "utilities"
     
@@ -79,6 +79,8 @@ final class UtilitiesCell: UICollectionViewListCell {
         }
     }
     
+    // MARK: - Configure cell with recieved data
+
     public func configure(with data: UtilitiesModel) {
         setupHierarchy()
         setupLayout()
@@ -88,5 +90,15 @@ final class UtilitiesCell: UICollectionViewListCell {
         if data.hasBottomDivider {
             addBottomDivider()
         }
+    }
+    
+    // MARK: - Cell when selected
+    
+    func highlight() {
+        
+    }
+    
+    func unhighlight() {
+        
     }
 }

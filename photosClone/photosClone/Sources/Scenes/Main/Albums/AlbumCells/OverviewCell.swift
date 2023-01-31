@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class OverviewCell: UICollectionViewCell {
+final class OverviewCell: UICollectionViewCell, Highlightable {
     
     static var cellID = "overview"
     
@@ -176,6 +176,16 @@ final class OverviewCell: UICollectionViewCell {
         } else if type == "Places" {
             setupPlacesCell(with: images, count: count)
         }
+    }
+    
+    // MARK: - Cell when selected
+    
+    func highlight() {
+        
+    }
+    
+    func unhighlight() {
+        
     }
 }
 

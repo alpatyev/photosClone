@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AlbumCell: UICollectionViewCell {
+final class AlbumCell: UICollectionViewCell, Highlightable {
     
     static var cellID = "album"
     
@@ -20,7 +20,7 @@ final class AlbumCell: UICollectionViewCell {
     
     private lazy var largeImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "emptyAlbum")
+        imageView.setupImageForBothStates(image: "emptyAlbum")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 2
@@ -56,7 +56,6 @@ final class AlbumCell: UICollectionViewCell {
         super.init(frame: frame)
         setupHierarchy()
         setupLayout()
-        largeImage.backgroundColor = .black.withAlphaComponent(0.1)
     }
     
     required init?(coder: NSCoder) {
@@ -67,9 +66,9 @@ final class AlbumCell: UICollectionViewCell {
     
     private func setupHierarchy() {
         addSubview(container)
-        addSubview(largeImage)
-        addSubview(itemTitle)
-        addSubview(itemsCountTitle)
+        container.addSubview(largeImage)
+        container.addSubview(itemTitle)
+        container.addSubview(itemsCountTitle)
     }
     
     private func setupLayout() {
@@ -128,4 +127,46 @@ final class AlbumCell: UICollectionViewCell {
         
         itemsCountTitle.text = "\(model.images.count)"
     }
+    
+    // MARK: - Cell when selected
+    
+    func highlight() {
+        largeImage.isHighlighted = true
+    }
+    
+    func unhighlight() {
+        largeImage.isHighlighted = false
+    }
 }
+
+extension UIImageView {
+    func setupImageForBothStates(image named: String) {
+        guard let image = UIImage(named: named) else {
+            return
+        }
+        self.image = image
+        self.highlightedImage = image.imageWithColor(color: Constants.Colors.highlighted)
+    }
+}
+
+extension UIImage {
+    func imageWithColor(color: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        color.setFill()
+
+        let context = UIGraphicsGetCurrentContext()
+        context?.translateBy(x: 0, y: self.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
+        context?.setBlendMode(CGBlendMode.normal)
+
+        let rect = CGRect(origin: .zero, size: CGSize(width: self.size.width, height: self.size.height))
+        context?.clip(to: rect, mask: self.cgImage!)
+        context?.fill(rect)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
+    }
+}
+

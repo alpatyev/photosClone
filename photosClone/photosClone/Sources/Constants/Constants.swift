@@ -14,6 +14,7 @@ enum Constants {
         static var border = UIColor.black
         static var text = UIColor.black
         static var lightText = UIColor.white
+        static var highlighted = UIColor.black.withAlphaComponent(0.2)
     }
     
     enum Fonts {
