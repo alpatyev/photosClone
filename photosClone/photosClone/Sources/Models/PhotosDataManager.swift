@@ -34,6 +34,68 @@ final class PhotosDataManager {
     static var imageModelPath: String?
     
     // MARK: Open methods
+    
+    static func selectedItem(at indexPath: IndexPath) {
+        switch indexPath.section {
+            case 0:
+                print("My Albums: at \(indexPath.row)")
+            case 1:
+                if indexPath.row == 0 {
+                    print("People & Places: People")
+                } else if indexPath.row == 1 {
+                    print("People & Places: Places")
+                }
+            case 2:
+                print("Utilities: Imports")
+            case 3:
+                print("Utilities: Hidden")
+            default:
+                print("Utilities: Recently Deleted")
+        }
+    }
+    
+    static func createUtilitiesCellModel(for line: Int) -> UtilitiesModel? {
+        switch line {
+            case 2:
+                return UtilitiesModel(image: "imports",
+                                      title: "Imports")
+            case 3:
+                return UtilitiesModel(image: "hidden",
+                                      title: "Hidden")
+            case 4:
+                return UtilitiesModel(image: "deleted",
+                                      title: "Recently Deleted",
+                                      divider: false)
+            default:
+                return nil
+        }
+    }
+    
+    static func getAlbumsCount() -> Int {
+        PhotosDataManager.storage.list.count
+    }
+    
+    static func getPeopleCellData() -> [String] {
+        ["topLeft",
+         "bottomLeft",
+         "bottomRight",
+         "topRight"]
+    }
+    
+    static func getPlacesCellData() -> ([String], Int) {
+        let album = PhotosDataManager.storage.list.randomElement()
+        let mapName = "mapSnapShot"
+        let imageName = album?.images.randomElement()?.imageFileName ?? ""
+        let placesCount = Int.random(in: 1...(album?.images.count ?? 1))
+        return ([mapName, imageName], placesCount)
+    }
+    
+    static func getAlbum(at index: Int) -> PDAlbum? {
+        guard index < PhotosDataManager.storage.list.count else {
+            return nil
+        }
+        return PhotosDataManager.storage.list[index]
+    }
         
     static func deleteAlbum(at index: Int) {
         guard (index > 1) && (index < PhotosDataManager.storage.list.count) else {

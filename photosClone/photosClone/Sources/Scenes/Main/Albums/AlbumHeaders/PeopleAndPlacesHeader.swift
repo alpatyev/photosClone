@@ -16,6 +16,7 @@ final class PeopleAndPlacesHeader: UICollectionReusableView {
     private lazy var topTitle: UILabel = {
         let label = UILabel()
         label.text = PeopleAndPlacesHeader.headerID
+        label.font = Constants.Fonts.subHeaderFont
         label.textAlignment = .left
         label.textColor = .black
         return label
@@ -23,7 +24,7 @@ final class PeopleAndPlacesHeader: UICollectionReusableView {
     
     private lazy var divider: UIView = {
         let line = UIView()
-        line.backgroundColor = .gray.withAlphaComponent(0.8)
+        line.backgroundColor = .gray.withAlphaComponent(0.5)
         return line
     }()
     
@@ -31,7 +32,6 @@ final class PeopleAndPlacesHeader: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addBorders()
         setupHierarchy()
         setupLayout()
     }
@@ -50,7 +50,7 @@ final class PeopleAndPlacesHeader: UICollectionReusableView {
     private func setupLayout() {
         divider.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(2)
+            make.height.equalTo(1)
         }
         
         topTitle.snp.makeConstraints { make in

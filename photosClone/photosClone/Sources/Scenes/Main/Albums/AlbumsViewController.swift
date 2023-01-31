@@ -13,7 +13,7 @@ class AlbumsViewController: UIViewController {
     // MARK: - UI
     
     static let screenSize = UIScreen.main.bounds
-    
+  
     private lazy var collection: UICollectionView = {
         let layout = createLayout()
         let collection = UICollectionView(frame: .zero,
@@ -50,7 +50,7 @@ class AlbumsViewController: UIViewController {
     // MARK: - Setups
     
     private func setupView() {
-        title = "Albums"
+        view.backgroundColor = .white
     }
     
     private func setupHierarchy() {
@@ -60,7 +60,9 @@ class AlbumsViewController: UIViewController {
     private func setupLayout() {
         collection.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.bottom.right.equalTo(view)
+            make.bottom.equalToSuperview()
+            make.right.equalToSuperview().inset(10)
+            make.left.equalToSuperview().offset(20)
         }
     }
     
@@ -92,7 +94,7 @@ class AlbumsViewController: UIViewController {
                 layoutSection.contentInsets.bottom = defaultPaging / 2
                 
                 let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .absolute(defaultPaging * 2))
+                                                              heightDimension: .absolute(defaultPaging * 2.4))
                 let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
@@ -106,6 +108,7 @@ class AlbumsViewController: UIViewController {
                 
                 let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
                 layoutItem.contentInsets = defaultInsets
+                layoutItem.contentInsets.trailing += 2
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                        heightDimension: .fractionalWidth(0.6))
@@ -119,7 +122,7 @@ class AlbumsViewController: UIViewController {
                 layoutSection.contentInsets.bottom = defaultPaging / 2
                 
                 let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .absolute(defaultPaging))
+                                                              heightDimension: .absolute(defaultPaging * 1.2))
                 let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: layoutHeaderSize,
                     elementKind: UICollectionView.elementKindSectionHeader,
@@ -132,31 +135,31 @@ class AlbumsViewController: UIViewController {
                                                       heightDimension: .fractionalHeight(1))
                 
                 let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-                layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 2,
-                                                                   leading: 2,
-                                                                   bottom: 2,
-                                                                   trailing: 2)
+                layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                                   leading: 0,
+                                                                   bottom: 0,
+                                                                   trailing: 0)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                        heightDimension: .fractionalWidth(0.12))
                 let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                                      subitems: [layoutItem])
-                layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 1,
-                                                                    leading: 1,
-                                                                    bottom: 1,
-                                                                    trailing: 1)
+                layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                                    leading: 0,
+                                                                    bottom: 0,
+                                                                    trailing: 0)
                 
                 let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
                 layoutSection.orthogonalScrollingBehavior = .none
 
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 2,
-                                                                      leading: 2,
-                                                                      bottom: 2,
-                                                                      trailing: 2)
+                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                                      leading: 0,
+                                                                      bottom: 0,
+                                                                      trailing: 0)
                 
                 if section == 2 {
                     let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                  heightDimension: .absolute(defaultPaging))
+                                                                  heightDimension: .absolute(defaultPaging * 1.2))
                     let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
                         layoutSize: layoutHeaderSize,
                         elementKind: UICollectionView.elementKindSectionHeader,
@@ -173,7 +176,6 @@ class AlbumsViewController: UIViewController {
 // MARK: - UICollectionViewDelegate
 
 extension AlbumsViewController: UICollectionViewDelegate {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         5
     }
@@ -182,10 +184,15 @@ extension AlbumsViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 
 extension AlbumsViewController: UICollectionViewDataSource {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let indexPath = collection.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionView.elementKindSectionHeader).first {
+            navigationController?.navigationBar.topItem?.title = indexPath.section > 1 ? "Albums" : ""
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return 2
+            return PhotosDataManager.getAlbumsCount()
         } else if section == 1 {
             return 2
         } else {
@@ -210,26 +217,38 @@ extension AlbumsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
             case 0:
-                let cell = collection.dequeueReusableCell(withReuseIdentifier: AlbumCell.cellID, for: indexPath)
-                return cell
+                if let cell = collection.dequeueReusableCell(withReuseIdentifier: AlbumCell.cellID, for: indexPath) as? AlbumCell {
+                    cell.configure(with: PhotosDataManager.getAlbum(at: indexPath.row))
+                    return cell
+                }
             case 1:
                 if let cell = collection.dequeueReusableCell(withReuseIdentifier: OverviewCell.cellID, for: indexPath) as? OverviewCell {
-                    cell.configure(as: "People")
+                    if indexPath.row == 0 {
+                        cell.configure(type: "People",
+                                       images: PhotosDataManager.getPeopleCellData())
+                    } else {
+                        let (images, count) = PhotosDataManager.getPlacesCellData()
+                        cell.configure(type: "Places", images: images, count: count)
+                    }
                     return cell
-                } else {
-                    fallthrough
                 }
             default:
                 if let cell = collection.dequeueReusableCell(withReuseIdentifier: UtilitiesCell.cellID, for: indexPath) as? UtilitiesCell {
-                    cell.configure()
+                    if let cellModel = PhotosDataManager.createUtilitiesCellModel(for: indexPath.section) {
+                        cell.configure(with: cellModel)
+                    }
+                    cell.accessories = [.disclosureIndicator()]
                     return cell
-                } else {
-                    return UICollectionViewCell()
                 }
         }
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collection.deselectItem(at: indexPath, animated: true)
+        PhotosDataManager.selectedItem(at: indexPath)
     }
 }
-
 
 extension UIView {
     func addBorders(with color: UIColor = .black) {

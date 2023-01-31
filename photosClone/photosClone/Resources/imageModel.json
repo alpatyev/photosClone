@@ -1,15 +1,28 @@
 {
     "list": [
         {
-            "name": "OSXQRT",
+            "name": "Recents",
             "images": [
                 {
-                    "imageName": "1000",
-                    "imageFileName": "expo"
+                    "imageName": "first",
+                    "imageFileName": "name"
                 },
                 {
-                    "imageName": "2000",
-                    "imageFileName": "orbiter"
+                    "imageName": "second",
+                    "imageFileName": "name"
+                }
+            ]
+        },
+        {
+            "name": "Favorites",
+            "images": [
+                {
+                    "imageName": "first",
+                    "imageFileName": "name"
+                },
+                {
+                    "imageName": "second",
+                    "imageFileName": "name"
                 }
             ]
         }

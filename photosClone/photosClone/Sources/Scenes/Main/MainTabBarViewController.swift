@@ -17,6 +17,7 @@ final class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
         setupAppearance()
         setupTabBarControllers()
+        loadAlbumsData()
     }
     
     // MARK: - Setups
@@ -40,6 +41,10 @@ final class MainTabBarViewController: UITabBarController {
                                                     image: "magnifyingglass")]
         
         selectedViewController = viewControllers?[2]
+    }
+    
+    private func loadAlbumsData() {
+        PhotosDataManager.fetchImages()
     }
     
     private func controllerWithTabBarItem(_ controller: UIViewController, title: String, image: String) -> UINavigationController {
