@@ -54,10 +54,11 @@ class AlbumsViewController: UIViewController {
         setupLayout()
     }
     
-    // MARK: - Setups
+    // MARK: - Setup collection and navigation bar
     
     private func setupView() {
         view.backgroundColor = .white
+        navigationItem.leftBarButtonItems = createBarItems()
     }
     
     private func setupHierarchy() {
@@ -96,7 +97,7 @@ class AlbumsViewController: UIViewController {
                 layoutGroup.contentInsets = defaultInsets
                 
                 let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-                layoutSection.orthogonalScrollingBehavior = .groupPaging
+                layoutSection.orthogonalScrollingBehavior = .paging
                 layoutSection.contentInsets = defaultInsets
                 layoutSection.contentInsets.bottom = defaultPaging / 2
                 
@@ -177,6 +178,27 @@ class AlbumsViewController: UIViewController {
                 return layoutSection
             }
         }
+    }
+    
+    // MARK: - Setup left navigation bar item
+    
+    private func createBarItems() -> [UIBarButtonItem] {
+        [UIBarButtonItem(title: nil,
+                         image: UIImage(named: "plus"),
+                         primaryAction: nil,
+                         menu: createBarMenu())]
+    }
+    
+    private func createBarMenu() -> UIMenu {
+        let first = UIAction(title: "New Album", image: UIImage(systemName: "rectangle.stack.badge.plus")) { _ in
+            PhotosDataManager.createAlbumTapped()
+        }
+        
+        let second = UIAction(title: "New Folder", image: UIImage(systemName: "folder.badge.plus")) { _ in
+            PhotosDataManager.createFolderTapped()
+        }
+        
+        return UIMenu(title: "", children: [first, second])
     }
 }
 
@@ -263,13 +285,5 @@ extension AlbumsViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if let cell = collection.cellForItem(at: indexPath) as? Highlightable {
             cell.unhighlight()
         }
-    }
-}
-
-extension UIView {
-    func addBorders(with color: UIColor = .black) {
-        self.layer.borderWidth = 2
-        self.layer.borderColor = color.cgColor
-        self.backgroundColor = .clear
     }
 }

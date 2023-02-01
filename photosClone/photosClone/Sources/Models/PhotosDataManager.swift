@@ -35,22 +35,34 @@ final class PhotosDataManager {
     
     // MARK: Open methods
     
+    static func createFolderTapped() {
+        print("Open -> New Folder")
+    }
+    
+    static func createAlbumTapped() {
+        print("Open -> New Album")
+    }
+    
+    static func seeAllTapped() {
+        print("Open -> See All")
+    }
+    
     static func selectedItem(at indexPath: IndexPath) {
         switch indexPath.section {
             case 0:
-                print("My Albums: at \(indexPath.row)")
+                print("Open -> Album with name <\(storage.list[indexPath.row].name)>")
             case 1:
                 if indexPath.row == 0 {
-                    print("People & Places: People")
+                    print("Open -> People & Places: People")
                 } else if indexPath.row == 1 {
-                    print("People & Places: Places")
+                    print("Open -> People & Places: Places")
                 }
             case 2:
-                print("Utilities: Imports")
+                print("Open -> Utilities: Imports")
             case 3:
-                print("Utilities: Hidden")
+                print("Open -> Utilities: Hidden")
             default:
-                print("Utilities: Recently Deleted")
+                print("Open -> Utilities: Recently Deleted")
         }
     }
     
@@ -65,6 +77,7 @@ final class PhotosDataManager {
             case 4:
                 return UtilitiesModel(image: "deleted",
                                       title: "Recently Deleted",
+                                      count: 7,
                                       divider: false)
             default:
                 return nil
@@ -85,8 +98,15 @@ final class PhotosDataManager {
     static func getPlacesCellData() -> ([String], Int) {
         let album = PhotosDataManager.storage.list.randomElement()
         let mapName = "mapSnapShot"
-        let imageName = album?.images.randomElement()?.imageFileName ?? ""
-        let placesCount = Int.random(in: 1...(album?.images.count ?? 1))
+        var imageName = ""
+        var placesCount = 0
+        if let albumExists = album  {
+            if let randomImage = albumExists.images.randomElement() {
+                imageName = randomImage.imageFileName
+                let last = albumExists.images.count > 0 ? albumExists.images.count : 1
+                placesCount = Int.random(in: 1...last)
+            }
+        }
         return ([mapName, imageName], placesCount)
     }
     

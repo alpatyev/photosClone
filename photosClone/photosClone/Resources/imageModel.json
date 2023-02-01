@@ -4,12 +4,40 @@
             "name": "Recents",
             "images": [
                 {
-                    "imageName": "first",
-                    "imageFileName": "name"
+                    "imageName": "Hasbulla",
+                    "imageFileName": "topLeft"
                 },
                 {
-                    "imageName": "second",
-                    "imageFileName": "name"
+                    "imageName": "Kizaru",
+                    "imageFileName": "bottomLeft"
+                },
+                {
+                    "imageName": "Think about it",
+                    "imageFileName": "topLeft"
+                },
+                {
+                    "imageName": "Kanye West",
+                    "imageFileName": "bottomRight"
+                },
+                {
+                    "imageName": "Gilfoyle",
+                    "imageFileName": "gilfoyle"
+                },
+                {
+                    "imageName": "Gilfoyle and beer",
+                    "imageFileName": "gilfoyle2"
+                },
+                {
+                    "imageName": "Boss",
+                    "imageFileName": "boss"
+                },
+                {
+                    "imageName": "Bachman",
+                    "imageFileName": "erlich"
+                },
+                {
+                    "imageName": "Moscow",
+                    "imageFileName": "mercedes"
                 }
             ]
         },
@@ -17,14 +45,43 @@
             "name": "Favorites",
             "images": [
                 {
-                    "imageName": "first",
-                    "imageFileName": "name"
+                    "imageName": "Hasbulla",
+                    "imageFileName": "topLeft"
                 },
                 {
-                    "imageName": "second",
-                    "imageFileName": "name"
+                    "imageName": "Kizaru",
+                    "imageFileName": "bottomLeft"
                 }
             ]
+        },
+        {
+            "name": "Friends",
+            "images": [
+                {
+                    "imageName": "Gilfoyle",
+                    "imageFileName": "gilfoyle"
+                },
+                {
+                    "imageName": "Gilfoyle and beer",
+                    "imageFileName": "gilfoyle2"
+                },
+                {
+                    "imageName": "Boss",
+                    "imageFileName": "boss"
+                },
+                {
+                    "imageName": "Bachman",
+                    "imageFileName": "erlich"
+                }
+            ]
+        },
+        {
+            "name": "Classes",
+            "images": []
+        },
+        {
+            "name": "Weekends",
+            "images": []
         }
     ]
 }

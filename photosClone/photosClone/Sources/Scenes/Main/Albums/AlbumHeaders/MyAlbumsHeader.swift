@@ -25,7 +25,7 @@ final class MyAlbumsHeader: UICollectionReusableView {
     
     private lazy var divider: UIView = {
         let line = UIView()
-        line.backgroundColor = .gray.withAlphaComponent(0.5)
+        line.backgroundColor = Constants.Colors.divider
         return line
     }()
     
@@ -40,7 +40,7 @@ final class MyAlbumsHeader: UICollectionReusableView {
     
     private lazy var seeAllButton: UIButton = {
         let button = UIButton()
-        button.setTitle("See all", for: .normal)
+        button.setTitle("See All", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 17, weight: .medium)
         button.setTitleColor(.systemBlue, for: .normal)
         button.setTitleColor(.systemBlue.withAlphaComponent(0.5), for: .highlighted)
@@ -77,7 +77,7 @@ final class MyAlbumsHeader: UICollectionReusableView {
         
         divider.snp.makeConstraints { make in
             make.left.right.centerY.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(1.25)
         }
         
         bottomTitle.snp.makeConstraints { make in
@@ -95,6 +95,6 @@ final class MyAlbumsHeader: UICollectionReusableView {
     // MARK: - Action
     
     @objc private func tapped() {
-        print("<See all> tapped")
+        PhotosDataManager.seeAllTapped()
     }
 }

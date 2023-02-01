@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class UtilitiesCell: UICollectionViewListCell, Highlightable {
+final class UtilitiesCell: UICollectionViewListCell {
     
     static var cellID = "utilities"
     
@@ -38,7 +38,7 @@ final class UtilitiesCell: UICollectionViewListCell, Highlightable {
     
     private lazy var divider: UIView = {
         let line = UIView()
-        line.backgroundColor = .gray.withAlphaComponent(0.5)
+        line.backgroundColor = Constants.Colors.divider
         return line
     }()
     
@@ -90,15 +90,5 @@ final class UtilitiesCell: UICollectionViewListCell, Highlightable {
         if data.hasBottomDivider {
             addBottomDivider()
         }
-    }
-    
-    // MARK: - Cell when selected
-    
-    func highlight() {
-        
-    }
-    
-    func unhighlight() {
-        
     }
 }

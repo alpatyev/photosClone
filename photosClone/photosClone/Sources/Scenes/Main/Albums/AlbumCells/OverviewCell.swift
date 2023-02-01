@@ -61,11 +61,11 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
     
     private lazy var smallImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.setupImageForBothStates(image: "emptyAlbum")
+        imageView.setupImageForBothStates(image: "emptyAlbum", border: .white)
         imageView.backgroundColor = .black.withAlphaComponent(0.3)
-        imageView.layer.cornerRadius = 6
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 3
+        imageView.layer.cornerRadius = 8
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
@@ -103,16 +103,12 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
         let width = contentView.frame.width
         let edge = width / 2
         
-        peopleIcons.forEach { $0.setupAsIcon(edge: edge) }
+        peopleIcons.forEach { $0.setupAsIcon(edge: edge); $0.frame.size = CGSize(width: edge, height: edge) }
         
-        firstPersonImage.frame = CGRect(x: 0, y: 0,
-                                        width: edge, height: edge)
-        secondPersonImage.frame = CGRect(x: 0, y: edge,
-                                         width: edge, height: edge)
-        thirdPersonImage.frame = CGRect(x: width / 2, y: width / 2,
-                                        width: edge, height: edge)
-        fourthPersonImage.frame = CGRect(x: width / 2, y: 0,
-                                         width: edge, height: edge)
+        firstPersonImage.frame.origin = .zero
+        secondPersonImage.frame.origin = CGPoint(x: .zero, y: edge)
+        thirdPersonImage.frame.origin = CGPoint(x: edge, y: edge)
+        fourthPersonImage.frame.origin = CGPoint(x: edge, y: .zero)
         
         itemTitle.frame = CGRect(x: 0, y: width,
                                  width: width, height: (contentView.frame.height - width) / 2)
@@ -179,23 +175,13 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
         peopleIcons.forEach { $0.isHighlighted = true }
         largeImage.isHighlighted = true
         smallImage.isHighlighted = true
+        smallImage.layer.borderColor = UIColor.white.withAlphaComponent(0.25).cgColor
     }
     
     func unhighlight() {
         peopleIcons.forEach { $0.isHighlighted = false }
-        largeImage.isHighlighted = false
         smallImage.isHighlighted = false
-    }
-}
-
-// MARK: - ImageView setup
-
-extension UIImageView {
-    func setupAsIcon(edge: CGFloat) {
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = edge / 2
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.white.cgColor;
-        self.backgroundColor = .gray.withAlphaComponent(0.2)
+        smallImage.layer.borderColor = UIColor.white.cgColor
+        largeImage.isHighlighted = false
     }
 }

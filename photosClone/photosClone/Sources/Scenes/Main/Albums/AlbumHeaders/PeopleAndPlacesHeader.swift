@@ -24,7 +24,7 @@ final class PeopleAndPlacesHeader: UICollectionReusableView {
     
     private lazy var divider: UIView = {
         let line = UIView()
-        line.backgroundColor = .gray.withAlphaComponent(0.5)
+        line.backgroundColor = Constants.Colors.divider
         return line
     }()
     
@@ -50,7 +50,7 @@ final class PeopleAndPlacesHeader: UICollectionReusableView {
     private func setupLayout() {
         divider.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(1.25)
         }
         
         topTitle.snp.makeConstraints { make in
