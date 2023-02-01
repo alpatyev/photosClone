@@ -27,12 +27,10 @@ class AllPhotosViewController: UIViewController {
         title = "All Photos"
     }
     
-    private func setupHierarchy() {
-    }
+    private func setupHierarchy() {}
     
-    private func setupLayout() {
-        
-    }
+    private func setupLayout() {}
     
     // MARK: - Actions
+    
 }

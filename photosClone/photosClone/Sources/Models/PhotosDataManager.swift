@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Common entities as an example
+// MARK: - Entities for data model below
 
 struct PDImage: Codable {
     var imageName: String
@@ -98,7 +98,7 @@ final class PhotosDataManager {
     static func getPlacesCellData() -> ([String], Int) {
         let album = PhotosDataManager.storage.list.randomElement()
         let mapName = "mapSnapShot"
-        var imageName = ""
+        var imageName = "emptyAlbum"
         var placesCount = 0
         if let albumExists = album  {
             if let randomImage = albumExists.images.randomElement() {

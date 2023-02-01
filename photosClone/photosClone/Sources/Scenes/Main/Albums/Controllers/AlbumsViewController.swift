@@ -125,7 +125,7 @@ class AlbumsViewController: UIViewController {
                 layoutGroup.contentInsets = defaultInsets
                 
                 let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-                layoutSection.orthogonalScrollingBehavior = .groupPaging
+                layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                 layoutSection.contentInsets = defaultInsets
                 layoutSection.contentInsets.bottom = defaultPaging / 2
                 

@@ -27,13 +27,10 @@ class ForYouViewController: UIViewController {
         title = "For You"
     }
     
-    private func setupHierarchy() {
-        
-    }
+    private func setupHierarchy() {}
     
-    private func setupLayout() {
-        
-    }
+    private func setupLayout() {}
     
     // MARK: - Actions
+    
 }

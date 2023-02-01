@@ -66,12 +66,12 @@
                     "imageFileName": "gilfoyle2"
                 },
                 {
-                    "imageName": "Boss",
-                    "imageFileName": "boss"
-                },
-                {
                     "imageName": "Bachman",
                     "imageFileName": "erlich"
+                },
+                {
+                    "imageName": "Boss",
+                    "imageFileName": "boss"
                 }
             ]
         },

@@ -110,19 +110,15 @@ final class AlbumCell: UICollectionViewCell, Highlightable {
         guard let model = data else {
             return
         }
-        
         if model.name == "Favorites" {
             addLikeSymbol()
         }
-        
         itemTitle.text = model.name
         
         guard let last = model.images.last else {
             return
         }
-        
         largeImage.setupImageForBothStates(image: last.imageFileName)
-        
         itemsCountTitle.text = "\(model.images.count)"
     }
     

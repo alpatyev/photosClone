@@ -197,9 +197,8 @@
 		645C3827296F7B6C00E6E6DF /* Albums */ = {
 			isa = PBXGroup;
 			children = (
-				645C3817296F6D2B00E6E6DF /* AlbumsViewController.swift */,
-				644A02C5297820DA000EC06F /* AlbumCells */,
-				644A02C929787015000EC06F /* AlbumHeaders */,
+				64F45B8C298A8E38008A8677 /* Controllers */,
+				64F45B8B298A8E16008A8677 /* Views */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -251,6 +250,23 @@
 				64F45B87298A8080008A8677 /* PhotosListViewController.swift */,
 			);
 			path = PhotosList;
+			sourceTree = "<group>";
+		};
+		64F45B8B298A8E16008A8677 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				644A02C5297820DA000EC06F /* AlbumCells */,
+				644A02C929787015000EC06F /* AlbumHeaders */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		64F45B8C298A8E38008A8677 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				645C3817296F6D2B00E6E6DF /* AlbumsViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
