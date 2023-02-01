@@ -52,8 +52,8 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
     
     private lazy var largeImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.setupImageForBothStates(image: "mapSnapShot")
         imageView.backgroundColor = .black.withAlphaComponent(0.3)
-        imageView.image = UIImage(named: "mapSnapShot")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         return imageView
@@ -61,6 +61,7 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
     
     private lazy var smallImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.setupImageForBothStates(image: "emptyAlbum")
         imageView.backgroundColor = .black.withAlphaComponent(0.3)
         imageView.layer.cornerRadius = 6
         imageView.layer.borderColor = UIColor.white.cgColor
@@ -83,9 +84,7 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
     private func setupPeopleCell(with images: [String]) {
         if images.count == 4 {
             for (i, name) in images.enumerated() {
-                if let exists = UIImage(named: name) {
-                    peopleIcons[i].image = exists
-                }
+                peopleIcons[i].setupImageForBothStates(image: name)
             }
         }
         
@@ -122,13 +121,9 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
     // MARK: - Setups if places cell type
     
     private func setupPlacesCell(with images: [String], count: Int) {
-        if let map = UIImage(named: images.first ?? "") {
-            largeImage.image = map
-        }
-        if let image = UIImage(named: images[1]) {
-            smallImage.image = image
-        } else {
-            smallImage.image = UIImage(named: "emptyAlbum")
+        if images.count == 2 {
+            largeImage.setupImageForBothStates(image: images[0])
+            smallImage.setupImageForBothStates(image: images[1])
         }
         
         itemsCountTitle.text = "\(count > 0 ? count : 0)"
@@ -181,11 +176,15 @@ final class OverviewCell: UICollectionViewCell, Highlightable {
     // MARK: - Cell when selected
     
     func highlight() {
-        
+        peopleIcons.forEach { $0.isHighlighted = true }
+        largeImage.isHighlighted = true
+        smallImage.isHighlighted = true
     }
     
     func unhighlight() {
-        
+        peopleIcons.forEach { $0.isHighlighted = false }
+        largeImage.isHighlighted = false
+        smallImage.isHighlighted = false
     }
 }
 

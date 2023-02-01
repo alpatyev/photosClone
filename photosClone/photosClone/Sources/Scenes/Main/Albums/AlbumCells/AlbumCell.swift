@@ -121,9 +121,7 @@ final class AlbumCell: UICollectionViewCell, Highlightable {
             return
         }
         
-        if let image = UIImage(named: last.imageFileName) {
-            largeImage.image = image
-        }
+        largeImage.setupImageForBothStates(image: last.imageFileName)
         
         itemsCountTitle.text = "\(model.images.count)"
     }
@@ -145,28 +143,28 @@ extension UIImageView {
             return
         }
         self.image = image
-        self.highlightedImage = image.imageWithColor(color: Constants.Colors.highlighted)
+        self.highlightedImage = image.imageWithTintColor(color: Constants.Colors.highlighted)
     }
 }
 
 extension UIImage {
-    func imageWithColor(color: UIColor) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+    func imageWithTintColor(color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        defer { UIGraphicsEndImageContext() }
+        
+        guard let context = UIGraphicsGetCurrentContext(), let cgImage = cgImage else {
+            return nil
+        }
+        
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.translateBy(x: 0, y: -size.height)
+        
+        let rect = CGRect(origin: .zero, size: size)
+        context.draw(cgImage, in: rect)
         color.setFill()
+        context.fill(rect)
 
-        let context = UIGraphicsGetCurrentContext()
-        context?.translateBy(x: 0, y: self.size.height)
-        context?.scaleBy(x: 1.0, y: -1.0)
-        context?.setBlendMode(CGBlendMode.normal)
-
-        let rect = CGRect(origin: .zero, size: CGSize(width: self.size.width, height: self.size.height))
-        context?.clip(to: rect, mask: self.cgImage!)
-        context?.fill(rect)
-
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return newImage!
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
-
