@@ -66,7 +66,7 @@ final class UtilitiesCell: UICollectionViewListCell {
         itemsCountTitle.snp.makeConstraints { make in
             make.height.centerY.equalToSuperview()
             make.width.equalTo(contentView.frame.height)
-            make.right.equalToSuperview().inset(10)
+            make.right.equalTo(contentView).offset(10)
         }
     }
     
@@ -82,6 +82,7 @@ final class UtilitiesCell: UICollectionViewListCell {
     // MARK: - Configure cell with recieved data
 
     public func configure(with data: UtilitiesModel) {
+        accessories = [.disclosureIndicator()]
         setupHierarchy()
         setupLayout()
         icon.image = UIImage(named: data.image)

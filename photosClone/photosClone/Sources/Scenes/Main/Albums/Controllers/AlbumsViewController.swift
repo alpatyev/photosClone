@@ -80,16 +80,16 @@ class AlbumsViewController: UIViewController {
     }
     
     private func createCollectionLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { [unowned self] (section, _) -> NSCollectionLayoutSection in
+        return UICollectionViewCompositionalLayout { [unowned self] (section, environement) -> NSCollectionLayoutSection in
             switch section {
                 case 0:
                     return self.createAlbumsLayout()
                 case 1:
                     return self.createPeopleAndPlacesLayout()
                 case 2:
-                    return self.createUtilitiesLayoutWithHeader()
+                    return self.createUtilitiesLayoutWithHeader(with: environement)
                 default:
-                    return self.createUtilitiesLayout()
+                    return self.createUtilitiesLayout(with: environement)
             }
         }
     }
@@ -165,42 +165,22 @@ class AlbumsViewController: UIViewController {
         return layoutSection
     }
     
-    private func createUtilitiesLayout() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                              heightDimension: .fractionalHeight(1))
+    private func createUtilitiesLayout(with environement: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.showsSeparators = false
         
-        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                           leading: 0,
-                                                           bottom: 0,
-                                                           trailing: 0)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                               heightDimension: .fractionalWidth(0.12))
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                             subitems: [layoutItem])
-        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                            leading: 0,
-                                                            bottom: 0,
-                                                            trailing: 0)
-        
-        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .none
-
-        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                              leading: 0,
-                                                              bottom: 0,
-                                                              trailing: 0)
+        let layoutSection = NSCollectionLayoutSection.list(using: configuration,
+                                                           layoutEnvironment: environement)
         
         return layoutSection
     }
     
-    private func createUtilitiesLayoutWithHeader() -> NSCollectionLayoutSection {
+    private func createUtilitiesLayoutWithHeader(with environement: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         let defaultPaging = AlbumsViewController.screenSize.width * 0.1
         
         //
         
-        let layoutSection = createUtilitiesLayout()
+        let layoutSection = createUtilitiesLayout(with: environement)
         
         let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                       heightDimension: .absolute(defaultPaging * 1.2))
@@ -292,7 +272,6 @@ extension AlbumsViewController: UICollectionViewDelegate, UICollectionViewDataSo
                     if let cellModel = PhotosDataManager.createUtilitiesCellModel(for: indexPath.section) {
                         cell.configure(with: cellModel)
                     }
-                    cell.accessories = [.disclosureIndicator()]
                     return cell
                 }
         }
