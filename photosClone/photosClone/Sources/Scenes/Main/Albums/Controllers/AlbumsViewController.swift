@@ -22,7 +22,7 @@ class AlbumsViewController: UIViewController {
     static let screenSize = UIScreen.main.bounds
   
     private lazy var collection: UICollectionView = {
-        let layout = createLayout()
+        let layout = createCollectionLayout()
         let collection = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout)
         collection.register(AlbumCell.self,
@@ -79,111 +79,142 @@ class AlbumsViewController: UIViewController {
         }
     }
     
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        return UICollectionViewCompositionalLayout { (section, _) -> NSCollectionLayoutSection in
-            
-            let defaultInsets = NSDirectionalEdgeInsets(top: 2,
-                                                        leading: 2,
-                                                        bottom: 2,
-                                                        trailing: 2)
-            let defaultPaging = AlbumsViewController.screenSize.width * 0.1
-            
-            if section == 0 {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .fractionalHeight(0.5))
-                
-                let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-                layoutItem.contentInsets = defaultInsets
-                
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                                       heightDimension: .fractionalWidth(1.2))
-                let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                                   subitems: [layoutItem])
-                layoutGroup.contentInsets = defaultInsets
-                
-                let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-                layoutSection.orthogonalScrollingBehavior = .paging
-                layoutSection.contentInsets = defaultInsets
-                layoutSection.contentInsets.bottom = defaultPaging / 2
-                
-                let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .absolute(defaultPaging * 2.4))
-                let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: layoutHeaderSize,
-                    elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top)
-                layoutSection.boundarySupplementaryItems = [layoutHeader]
-                
-                return layoutSection
-            } else if section == 1 {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
-                                                      heightDimension: .fractionalHeight(1))
-                
-                let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-                layoutItem.contentInsets = defaultInsets
-                layoutItem.contentInsets.trailing += 2
-                
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                       heightDimension: .fractionalWidth(0.6))
-                let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                                     subitems: [layoutItem])
-                layoutGroup.contentInsets = defaultInsets
-                
-                let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-                layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                layoutSection.contentInsets = defaultInsets
-                layoutSection.contentInsets.bottom = defaultPaging / 2
-                
-                let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .absolute(defaultPaging * 1.2))
-                let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: layoutHeaderSize,
-                    elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .top)
-                layoutSection.boundarySupplementaryItems = [layoutHeader]
-                
-                return layoutSection
-            } else {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .fractionalHeight(1))
-                
-                let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-                layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                                   leading: 0,
-                                                                   bottom: 0,
-                                                                   trailing: 0)
-                
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                       heightDimension: .fractionalWidth(0.12))
-                let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                                     subitems: [layoutItem])
-                layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                                    leading: 0,
-                                                                    bottom: 0,
-                                                                    trailing: 0)
-                
-                let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-                layoutSection.orthogonalScrollingBehavior = .none
-
-                layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                                      leading: 0,
-                                                                      bottom: 0,
-                                                                      trailing: 0)
-                
-                if section == 2 {
-                    let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                                  heightDimension: .absolute(defaultPaging * 1.2))
-                    let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                        layoutSize: layoutHeaderSize,
-                        elementKind: UICollectionView.elementKindSectionHeader,
-                        alignment: .top)
-                    layoutSection.boundarySupplementaryItems = [layoutHeader]
-                }
-                
-                return layoutSection
+    private func createCollectionLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { [unowned self] (section, _) -> NSCollectionLayoutSection in
+            switch section {
+                case 0:
+                    return self.createAlbumsLayout()
+                case 1:
+                    return self.createPeopleAndPlacesLayout()
+                case 2:
+                    return self.createUtilitiesLayoutWithHeader()
+                default:
+                    return self.createUtilitiesLayout()
             }
         }
     }
+    
+    private func createAlbumsLayout() -> NSCollectionLayoutSection {
+        let defaultInsets = NSDirectionalEdgeInsets(top: 2,
+                                                    leading: 2,
+                                                    bottom: 2,
+                                                    trailing: 2)
+        let defaultPaging = AlbumsViewController.screenSize.width * 0.1
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(0.5))
+        
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = defaultInsets
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                               heightDimension: .fractionalWidth(1.2))
+        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
+                                                           subitems: [layoutItem])
+        layoutGroup.contentInsets = defaultInsets
+        
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.orthogonalScrollingBehavior = .paging
+        layoutSection.contentInsets = defaultInsets
+        layoutSection.contentInsets.bottom = defaultPaging / 2
+        
+        let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                      heightDimension: .absolute(defaultPaging * 2.4))
+        let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: layoutHeaderSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top)
+        layoutSection.boundarySupplementaryItems = [layoutHeader]
+        
+        return layoutSection
+    }
+    
+    private func createPeopleAndPlacesLayout() -> NSCollectionLayoutSection {
+        let defaultInsets = NSDirectionalEdgeInsets(top: 2,
+                                                    leading: 2,
+                                                    bottom: 2,
+                                                    trailing: 2)
+        let defaultPaging = AlbumsViewController.screenSize.width * 0.1
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+                                              heightDimension: .fractionalHeight(1))
+        
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = defaultInsets
+        layoutItem.contentInsets.trailing += 2
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalWidth(0.6))
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                             subitems: [layoutItem])
+        layoutGroup.contentInsets = defaultInsets
+        
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        layoutSection.contentInsets = defaultInsets
+        layoutSection.contentInsets.bottom = defaultPaging / 2
+        
+        let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                      heightDimension: .absolute(defaultPaging * 1.2))
+        let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: layoutHeaderSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top)
+        layoutSection.boundarySupplementaryItems = [layoutHeader]
+        
+        return layoutSection
+    }
+    
+    private func createUtilitiesLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                              heightDimension: .fractionalHeight(1))
+        
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                           leading: 0,
+                                                           bottom: 0,
+                                                           trailing: 0)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                               heightDimension: .fractionalWidth(0.12))
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
+                                                             subitems: [layoutItem])
+        layoutGroup.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                            leading: 0,
+                                                            bottom: 0,
+                                                            trailing: 0)
+        
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.orthogonalScrollingBehavior = .none
+
+        layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                              leading: 0,
+                                                              bottom: 0,
+                                                              trailing: 0)
+        
+        return layoutSection
+    }
+    
+    private func createUtilitiesLayoutWithHeader() -> NSCollectionLayoutSection {
+        let defaultPaging = AlbumsViewController.screenSize.width * 0.1
+        
+        //
+        
+        let layoutSection = createUtilitiesLayout()
+        
+        let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
+                                                      heightDimension: .absolute(defaultPaging * 1.2))
+        let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: layoutHeaderSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top)
+        layoutSection.boundarySupplementaryItems = [layoutHeader]
+        
+        return layoutSection
+    }
+    
+
+    
     
     // MARK: - Setup left navigation bar item
     
