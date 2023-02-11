@@ -70,15 +70,19 @@ final class PhotosDataManager {
         switch line {
             case 2:
                 return UtilitiesModel(image: "imports",
-                                      title: "Imports")
+                                      title: "Imports",
+                                      itemsCountTitle: "",
+                                      hasBottomDivider: false)
             case 3:
                 return UtilitiesModel(image: "hidden",
-                                      title: "Hidden")
+                                      title: "Hidden",
+                                      itemsCountTitle: "",
+                                      hasBottomDivider: false)
             case 4:
                 return UtilitiesModel(image: "deleted",
                                       title: "Recently Deleted",
-                                      count: 7,
-                                      divider: false)
+                                      itemsCountTitle: "7",
+                                      hasBottomDivider: true)
             default:
                 return nil
         }

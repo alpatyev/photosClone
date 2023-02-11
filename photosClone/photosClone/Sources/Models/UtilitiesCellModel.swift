@@ -10,13 +10,4 @@ struct UtilitiesModel {
     let title: String
     let itemsCountTitle: String
     let hasBottomDivider: Bool
-    init(image: String = "default",
-         title: String = "",
-         count: Int = 0,
-         divider: Bool = true) {
-        self.image = image
-        self.title = title
-        itemsCountTitle = "\(count)"
-        hasBottomDivider = divider
-    }
 }
