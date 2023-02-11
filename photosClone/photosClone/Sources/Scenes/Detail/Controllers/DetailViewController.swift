@@ -13,6 +13,7 @@ final class DetailViewController: UIViewController {
     
     private lazy var centerLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .systemBlue
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label

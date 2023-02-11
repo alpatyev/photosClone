@@ -19,8 +19,12 @@ class AlbumsViewController: UIViewController {
     
     // MARK: - UI
     
-    static let screenSize = UIScreen.main.bounds
-  
+    private let defaultPaging = UIScreen.main.bounds.width * 0.1
+    private let defaultInsets = NSDirectionalEdgeInsets(top: 2,
+                                                        leading: 2,
+                                                        bottom: 2,
+                                                        trailing: 2)
+
     private lazy var collection: UICollectionView = {
         let layout = createCollectionLayout()
         let collection = UICollectionView(frame: .zero,
@@ -87,114 +91,72 @@ class AlbumsViewController: UIViewController {
                 case 1:
                     return self.createPeopleAndPlacesLayout()
                 case 2:
-                    return self.createUtilitiesLayoutWithHeader(with: environement)
+                    return self.createUtilitiesLayout(with: environement, withHeader: true)
                 default:
-                    return self.createUtilitiesLayout(with: environement)
+                    return self.createUtilitiesLayout(with: environement, withHeader: false)
             }
         }
     }
     
     private func createAlbumsLayout() -> NSCollectionLayoutSection {
-        let defaultInsets = NSDirectionalEdgeInsets(top: 2,
-                                                    leading: 2,
-                                                    bottom: 2,
-                                                    trailing: 2)
-        let defaultPaging = AlbumsViewController.screenSize.width * 0.1
-        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                               heightDimension: .fractionalHeight(0.5))
-        
-        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        layoutItem.contentInsets = defaultInsets
-        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                                heightDimension: .fractionalWidth(1.2))
-        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize,
-                                                           subitems: [layoutItem])
-        layoutGroup.contentInsets = defaultInsets
         
-        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .paging
-        layoutSection.contentInsets = defaultInsets
-        layoutSection.contentInsets.bottom = defaultPaging / 2
-        
-        let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .absolute(defaultPaging * 2.4))
-        let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: layoutHeaderSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top)
-        layoutSection.boundarySupplementaryItems = [layoutHeader]
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [layoutItem])
+        layoutItem.contentInsets = defaultInsets
+        let layoutSection = createDefaultLayoutSection(for: layoutGroup)
+        layoutSection.boundarySupplementaryItems = [createHeaderItem(heightMultiplier: 2)]
         
         return layoutSection
     }
     
     private func createPeopleAndPlacesLayout() -> NSCollectionLayoutSection {
-        let defaultInsets = NSDirectionalEdgeInsets(top: 2,
-                                                    leading: 2,
-                                                    bottom: 2,
-                                                    trailing: 2)
-        let defaultPaging = AlbumsViewController.screenSize.width * 0.1
-        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
                                               heightDimension: .fractionalHeight(1))
-        
-        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        layoutItem.contentInsets = defaultInsets
-        layoutItem.contentInsets.trailing += 2
-        
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                heightDimension: .fractionalWidth(0.6))
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
-                                                             subitems: [layoutItem])
-        layoutGroup.contentInsets = defaultInsets
         
-        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-        layoutSection.contentInsets = defaultInsets
-        layoutSection.contentInsets.bottom = defaultPaging / 2
-        
-        let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .absolute(defaultPaging * 1.2))
-        let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: layoutHeaderSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top)
-        layoutSection.boundarySupplementaryItems = [layoutHeader]
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [layoutItem])
+        layoutItem.contentInsets = defaultInsets
+        let layoutSection = createDefaultLayoutSection(for: layoutGroup)
+        layoutSection.boundarySupplementaryItems = [createHeaderItem()]
         
         return layoutSection
     }
     
-    private func createUtilitiesLayout(with environement: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    private func createUtilitiesLayout(with environement: NSCollectionLayoutEnvironment, withHeader: Bool) -> NSCollectionLayoutSection {
         var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         configuration.showsSeparators = false
-        
         let layoutSection = NSCollectionLayoutSection.list(using: configuration,
                                                            layoutEnvironment: environement)
-        
+        if withHeader {
+            layoutSection.boundarySupplementaryItems = [createHeaderItem()]
+        }
         return layoutSection
     }
     
-    private func createUtilitiesLayoutWithHeader(with environement: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-        let defaultPaging = AlbumsViewController.screenSize.width * 0.1
-        
-        //
-        
-        let layoutSection = createUtilitiesLayout(with: environement)
-        
+    private func createDefaultLayoutSection(for group: NSCollectionLayoutGroup) -> NSCollectionLayoutSection {
+        group.contentInsets = defaultInsets
+        let layoutSection = NSCollectionLayoutSection(group: group)
+        layoutSection.orthogonalScrollingBehavior = .paging
+        layoutSection.contentInsets = defaultInsets
+        layoutSection.contentInsets.bottom = defaultPaging / 2
+        return layoutSection
+    }
+    
+    private func createHeaderItem(heightMultiplier: CGFloat = 1) -> NSCollectionLayoutBoundarySupplementaryItem {
         let layoutHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .absolute(defaultPaging * 1.2))
+                                                      heightDimension: .absolute(defaultPaging * 1.2 * heightMultiplier))
         let layoutHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: layoutHeaderSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
-        layoutSection.boundarySupplementaryItems = [layoutHeader]
-        
-        return layoutSection
+        return layoutHeader
     }
-    
-
-    
     
     // MARK: - Setup left navigation bar item
     
