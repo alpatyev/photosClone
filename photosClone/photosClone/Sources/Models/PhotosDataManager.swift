@@ -91,8 +91,15 @@ final class PhotosDataManager {
         }
     }
     
-    static func getAlbumsCount() -> Int {
-        PhotosDataManager.storage.list.count
+    static func getNumberOfItems(for section: Int) -> Int {
+        switch section {
+            case 0:
+                return PhotosDataManager.storage.list.count
+            case 1:
+                return 2
+            default:
+                return 1
+        }
     }
     
     static func getPeopleCellData() -> [String] {

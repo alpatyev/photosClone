@@ -221,13 +221,7 @@ extension AlbumsViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return PhotosDataManager.getAlbumsCount()
-        } else if section == 1 {
-            return 2
-        } else {
-            return 1
-        }
+        PhotosDataManager.getNumberOfItems(for: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
