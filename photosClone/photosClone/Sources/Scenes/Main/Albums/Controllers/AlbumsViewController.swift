@@ -54,6 +54,11 @@ class AlbumsViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.navigationBar.topItem?.title = nil
+    }
+    
     // MARK: - Setup collection and navigation bar
     
     private func setupView() {
@@ -211,7 +216,7 @@ extension AlbumsViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if let indexPath = collection.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionView.elementKindSectionHeader).first {
-            navigationController?.navigationBar.topItem?.title = indexPath.section > 1 ? "Albums" : ""
+            navigationController?.navigationBar.topItem?.title = indexPath.section > 1 ? "Albums" : nil
         }
     }
     
@@ -271,7 +276,11 @@ extension AlbumsViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collection.deselectItem(at: indexPath, animated: true)
-        PhotosDataManager.selectedItem(at: indexPath)
+        let someData = PhotosDataManager.selectedItem(at: indexPath)
+        let controller = DetailViewController()
+        controller.setupLabel(with: someData)
+        navigationController?.navigationBar.topItem?.title = "Albums"
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     

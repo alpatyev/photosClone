@@ -47,23 +47,26 @@ final class PhotosDataManager {
         print("Open -> See All")
     }
     
-    static func selectedItem(at indexPath: IndexPath) {
+    static func selectedItem(at indexPath: IndexPath) -> String {
+        var throwedText = String()
         switch indexPath.section {
             case 0:
-                print("Open -> Album with name <\(storage.list[indexPath.row].name)>")
+                throwedText = "Album with name <\(storage.list[indexPath.row].name)>"
             case 1:
                 if indexPath.row == 0 {
-                    print("Open -> People & Places: People")
+                    throwedText = "People & Places: People"
                 } else if indexPath.row == 1 {
-                    print("Open -> People & Places: Places")
+                    throwedText = "People & Places: Places"
                 }
             case 2:
-                print("Open -> Utilities: Imports")
+                throwedText = "Utilities: Imports"
             case 3:
-                print("Open -> Utilities: Hidden")
+                throwedText = "Utilities: Hidden"
             default:
-                print("Open -> Utilities: Recently Deleted")
+                break
         }
+        print("Open -> " + throwedText)
+        return throwedText
     }
     
     static func createUtilitiesCellModel(for line: Int) -> UtilitiesModel? {

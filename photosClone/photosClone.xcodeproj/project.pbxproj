@@ -24,12 +24,11 @@
 		645C381A296F6D3600E6E6DF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645C3819296F6D3600E6E6DF /* SearchViewController.swift */; };
 		645C382A296F7E1B00E6E6DF /* imageModel.json in Resources */ = {isa = PBXBuildFile; fileRef = 645C3829296F7E1B00E6E6DF /* imageModel.json */; };
 		645C382D296F805900E6E6DF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 645C382C296F805900E6E6DF /* SnapKit */; };
+		649054012998064B00713846 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649054002998064A00713846 /* DetailViewController.swift */; };
 		649564D22988056800F9415D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649564D12988056700F9415D /* Constants.swift */; };
 		649564D429880E4700F9415D /* UtilitiesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649564D329880E4700F9415D /* UtilitiesCellModel.swift */; };
 		64E5731E2974537D007D307D /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E5731D2974537D007D307D /* MainTabBarViewController.swift */; };
 		64F45B84298A71A4008A8677 /* UIImageView + UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F45B83298A71A4008A8677 /* UIImageView + UIImage.swift */; };
-		64F45B88298A8081008A8677 /* PhotosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F45B87298A8080008A8677 /* PhotosListViewController.swift */; };
-		64F45B8A298A80C0008A8677 /* AlbumsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F45B89298A80C0008A8677 /* AlbumsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,12 +50,11 @@
 		645C3817296F6D2B00E6E6DF /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		645C3819296F6D3600E6E6DF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		645C3829296F7E1B00E6E6DF /* imageModel.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = imageModel.json; sourceTree = "<group>"; };
+		649054002998064A00713846 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		649564D12988056700F9415D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		649564D329880E4700F9415D /* UtilitiesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesCellModel.swift; sourceTree = "<group>"; };
 		64E5731D2974537D007D307D /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		64F45B83298A71A4008A8677 /* UIImageView + UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + UIImage.swift"; sourceTree = "<group>"; };
-		64F45B87298A8080008A8677 /* PhotosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosListViewController.swift; sourceTree = "<group>"; };
-		64F45B89298A80C0008A8677 /* AlbumsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +209,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		649054022998065200713846 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				649054002998064A00713846 /* DetailViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		649564D02988054500F9415D /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,8 +228,7 @@
 		64F45B7F298969DA008A8677 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				64F45B86298A8034008A8677 /* PhotosList */,
-				64F45B85298A801F008A8677 /* AlbumsList */,
+				649054022998065200713846 /* Controllers */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -234,22 +239,6 @@
 				64F45B83298A71A4008A8677 /* UIImageView + UIImage.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		64F45B85298A801F008A8677 /* AlbumsList */ = {
-			isa = PBXGroup;
-			children = (
-				64F45B89298A80C0008A8677 /* AlbumsListViewController.swift */,
-			);
-			path = AlbumsList;
-			sourceTree = "<group>";
-		};
-		64F45B86298A8034008A8677 /* PhotosList */ = {
-			isa = PBXGroup;
-			children = (
-				64F45B87298A8080008A8677 /* PhotosListViewController.swift */,
-			);
-			path = PhotosList;
 			sourceTree = "<group>";
 		};
 		64F45B8B298A8E16008A8677 /* Views */ = {
@@ -353,18 +342,17 @@
 				644A02C4297820D1000EC06F /* UtilitiesCell.swift in Sources */,
 				644A02CB29787015000EC06F /* MyAlbumsHeader.swift in Sources */,
 				644A02BE29781CF5000EC06F /* AlbumCell.swift in Sources */,
+				649054012998064B00713846 /* DetailViewController.swift in Sources */,
 				649564D22988056800F9415D /* Constants.swift in Sources */,
 				644A02CF297874A0000EC06F /* UtilitiesHeader.swift in Sources */,
 				64E5731E2974537D007D307D /* MainTabBarViewController.swift in Sources */,
 				644A02C2297820BE000EC06F /* OverviewCell.swift in Sources */,
 				645C37F6296F656700E6E6DF /* AppDelegate.swift in Sources */,
 				645C381A296F6D3600E6E6DF /* SearchViewController.swift in Sources */,
-				64F45B88298A8081008A8677 /* PhotosListViewController.swift in Sources */,
 				645C3816296F6D1D00E6E6DF /* ForYouViewController.swift in Sources */,
 				645C3814296F6D0E00E6E6DF /* AllPhotosViewController.swift in Sources */,
 				645C37F8296F656700E6E6DF /* SceneDelegate.swift in Sources */,
 				644A02CD29787450000EC06F /* PeopleAndPlacesHeader.swift in Sources */,
-				64F45B8A298A80C0008A8677 /* AlbumsListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
