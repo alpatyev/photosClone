@@ -1,0 +1,87 @@
+{
+    "list": [
+        {
+            "name": "Recents",
+            "images": [
+                {
+                    "imageName": "Hasbulla",
+                    "imageFileName": "topLeft"
+                },
+                {
+                    "imageName": "Kizaru",
+                    "imageFileName": "bottomLeft"
+                },
+                {
+                    "imageName": "Think about it",
+                    "imageFileName": "topLeft"
+                },
+                {
+                    "imageName": "Kanye West",
+                    "imageFileName": "bottomRight"
+                },
+                {
+                    "imageName": "Gilfoyle",
+                    "imageFileName": "gilfoyle"
+                },
+                {
+                    "imageName": "Gilfoyle and beer",
+                    "imageFileName": "gilfoyle2"
+                },
+                {
+                    "imageName": "Boss",
+                    "imageFileName": "boss"
+                },
+                {
+                    "imageName": "Bachman",
+                    "imageFileName": "erlich"
+                },
+                {
+                    "imageName": "Moscow",
+                    "imageFileName": "mercedes"
+                }
+            ]
+        },
+        {
+            "name": "Favorites",
+            "images": [
+                {
+                    "imageName": "Hasbulla",
+                    "imageFileName": "topLeft"
+                },
+                {
+                    "imageName": "Kizaru",
+                    "imageFileName": "bottomLeft"
+                }
+            ]
+        },
+        {
+            "name": "Friends",
+            "images": [
+                {
+                    "imageName": "Gilfoyle",
+                    "imageFileName": "gilfoyle"
+                },
+                {
+                    "imageName": "Gilfoyle and beer",
+                    "imageFileName": "gilfoyle2"
+                },
+                {
+                    "imageName": "Bachman",
+                    "imageFileName": "erlich"
+                },
+                {
+                    "imageName": "Boss",
+                    "imageFileName": "boss"
+                }
+            ]
+        },
+        {
+            "name": "Classes",
+            "images": []
+        },
+        {
+            "name": "Weekends",
+            "images": []
+        }
+    ]
+}
